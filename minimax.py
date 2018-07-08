@@ -106,7 +106,7 @@ class AlphaBeta:
             if state.player == self.player:
                 max_value = (float("-inf"), None)
                 for action in available_actions:
-                    max_value = max(max_value, (recurse(state.get_next_state(action), alpha, beta)[0], action))
+                    max_value = max(max_value, (recurse(state.get_next_state(action), alpha, beta)[0], action), key=lambda x:x[0])
                     alpha = max(alpha, max_value[0])
                     if beta <= alpha:
                         break
@@ -114,7 +114,7 @@ class AlphaBeta:
             elif state.player == get_opponent(self.player):
                 min_value = (float("inf"), None)
                 for action in available_actions:
-                    min_value = min(min_value, (recurse(state.get_next_state(action), alpha, beta)[0], action))
+                    min_value = min(min_value, (recurse(state.get_next_state(action), alpha, beta)[0], action), key=lambda x:x[0])
                     beta = min(beta, min_value[0])
                     if beta <= alpha:
                         break
